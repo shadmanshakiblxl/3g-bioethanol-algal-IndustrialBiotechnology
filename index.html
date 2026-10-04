@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3G Bioethanol | Industrial Production Strategy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        mono: ['Courier New', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4fbf7',
+                            100: '#e3f6eb',
+                            500: '#10b981',
+                            600: '#059669',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* MANDATORY RULE: No italics allowed anywhere */
+        * {
+            font-style: normal !important;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #0f172a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Reveal animations on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframe for Hero Text Fade In */
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-1 { animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s; opacity: 0; }
+        .animate-hero-2 { animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s; opacity: 0; }
+        .animate-hero-3 { animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s; opacity: 0; }
+        .animate-hero-4 { animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s; opacity: 0; }
+
+        /* Minimal clean custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #f1f5f9;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #0f172a;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-slate-900 selection:text-white">
+
+    <!-- TOP NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block group-hover:scale-125 transition-transform"></span>
+                <span class="font-extralight tracking-widest text-xs uppercase text-slate-900">3G BIOETHANOL / RESEARCH</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center space-x-10 text-xs tracking-wider uppercase font-light text-slate-500">
+                <a href="#overview" class="hover:text-slate-900 transition-colors">Overview</a>
+                <a href="#comparison" class="hover:text-slate-900 transition-colors">Generations</a>
+                <a href="#strains" class="hover:text-slate-900 transition-colors">Strains</a>
+                <a href="#process" class="hover:text-slate-900 transition-colors">Process</a>
+                <a href="#automation" class="hover:text-slate-900 transition-colors">Automation</a>
+                <a href="#bottlenecks" class="hover:text-slate-900 transition-colors">Challenges</a>
+                <a href="#biorefinery" class="hover:text-slate-900 transition-colors">Biorefinery</a>
+            </div>
+
+            <!-- Header View Project CTA -->
+            <a href="https://drive.google.com/file/d/1FKef8V2VX9woPghLd2rpQdEkTQRgNhFs/view?usp=sharing" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 text-xs font-light text-slate-900 hover:text-emerald-600 transition-colors py-2 px-4 border border-slate-200 rounded-full hover:border-emerald-500">
+                <span>PDF Document</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FULL-PAGE LARGE HERO SECTION -->
+    <section class="min-h-screen flex flex-col justify-between items-center text-center relative px-6 pt-28 pb-12 bg-white bg-grid-pattern">
+        <!-- Minimal subtle background glow -->
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-50/50 via-white to-white pointer-events-none"></div>
+
+        <div class="m-auto max-w-5xl relative z-10 flex flex-col items-center py-12">
+            <!-- Subtitle Tag -->
+            <div class="animate-hero-1 mb-8">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white text-[11px] font-extralight tracking-widest text-slate-500 uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Industrial Biotechnology Strategy &bull; 2026
+                </span>
+            </div>
+
+            <!-- Large Main Text in Middle (Thin, Clean, Modern Fonts) -->
+            <h1 class="animate-hero-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight text-slate-900 leading-[1.08] max-w-4xl mb-8">
+                Third-Generation <br/>
+                <span class="font-normal text-slate-900">Bioethanol Strategy</span>
+            </h1>
+
+            <p class="animate-hero-3 text-sm sm:text-base md:text-lg font-extralight text-slate-500 max-w-2xl mx-auto leading-relaxed mb-12">
+                Decarbonizing industrial energy via high-yield algal biomass, micro-fluidic metabolic optimization, and real-time FPGA-automated photobioreactor control.
+            </p>
+
+            <!-- Action Buttons under Main Text -->
+            <div class="animate-hero-4 flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
+                <a href="https://drive.google.com/file/d/1FKef8V2VX9woPghLd2rpQdEkTQRgNhFs/view?usp=sharing" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-slate-900 text-white hover:bg-emerald-600 font-light text-xs uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 shadow-sm hover:shadow-md">
+                    <span>View Project</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+
+                <a href="#overview" 
+                   class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 font-light text-xs uppercase tracking-widest px-8 py-4 rounded-full border border-slate-200 hover:border-slate-400 transition-all">
+                    <span>Explore Analysis</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Academic Attribution Footer in Hero -->
+        <div class="w-full max-w-5xl mx-auto pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-extralight text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="font-normal text-slate-700">Author:</span>
+                <span>Shadman Shakib (ID: 22136032)</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-normal text-slate-700">Course:</span>
+                <span>BTE306 Industrial Biotechnology &bull; Sec 03</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-normal text-slate-700">Institution:</span>
+                <span>BRAC University (Lecturer: Sadrina Afrin Mowna)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE OVERVIEW SECTION -->
+    <section id="overview" class="py-24 px-6 border-t border-slate-100 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">01 / EXECUTIVE SUMMARY</span>
+                <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">Pioneering Carbon-Neutral Energy Feedstocks</h2>
+            </div>
+
+            <!-- Minimalist split grid layout (No bulky cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-slate-100 pt-12">
+                <div class="reveal space-y-4">
+                    <span class="text-xs font-mono text-slate-400">01.01</span>
+                    <h3 class="text-lg font-light text-slate-900">The 3G Biofuel Leap</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Third-generation (3G) bioethanol leverages microalgal and macroalgal biomass as feedstocks, bypassing the ethical and spatial dilemmas of 1G food crops and the complex lignocellulosic recalcitrance of 2G land plants.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-4" style="transition-delay: 100ms;">
+                    <span class="text-xs font-mono text-slate-400">01.02</span>
+                    <h3 class="text-lg font-light text-slate-900">Metabolic & Growth Superiority</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Algae feature exceptionally rapid biomass doubling times (under 24 hours in optimal conditions), lack complex lignin polymers, and store high concentrations of intracellular starch and polysaccharides ready for enzymatic conversion.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-4" style="transition-delay: 200ms;">
+                    <span class="text-xs font-mono text-slate-400">01.03</span>
+                    <h3 class="text-lg font-light text-slate-900">Ecological Footprint Offset</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Cultivation utilizes non-arable desert terrain, industrial flue gas CO2 streams, and marine or wastewater matrices—eliminating freshwater competition while serving as high-capacity carbon sinks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Metric Indicators (Minimalist horizontal rule) -->
+            <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-slate-100 text-center md:text-left">
+                <div>
+                    <div class="text-3xl font-extralight text-slate-900">24 hrs</div>
+                    <div class="text-[11px] uppercase tracking-wider font-extralight text-slate-400 mt-1">Biomass Doubling Time</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extralight text-emerald-600">0%</div>
+                    <div class="text-[11px] uppercase tracking-wider font-extralight text-slate-400 mt-1">Lignin Interference</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extralight text-slate-900">18 g/L</div>
+                    <div class="text-[11px] uppercase tracking-wider font-extralight text-slate-400 mt-1">Sugar Yield Limit</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extralight text-slate-900">100%</div>
+                    <div class="text-[11px] uppercase tracking-wider font-extralight text-slate-400 mt-1">Non-Arable Cultivation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GENERATIONAL COMPARISON SECTION -->
+    <section id="comparison" class="py-24 px-6 border-t border-slate-100 bg-slate-50/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">02 / PARADIGM SHIFT</span>
+                    <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">1G vs 2G vs 3G Feedstock Matrix</h2>
+                </div>
+                <p class="text-xs font-extralight text-slate-500 max-w-md">
+                    Select a biofuel generation to evaluate structural mechanics, land impacts, and industrial throughput efficiency.
+                </p>
+            </div>
+
+            <!-- Interactive Tab Switcher -->
+            <div class="reveal border-b border-slate-200 flex gap-8 mb-8 overflow-x-auto pb-1" id="gen-tabs">
+                <button onclick="selectGen('1G')" id="tab-1G" class="text-xs uppercase tracking-widest pb-3 font-light border-b-2 border-transparent text-slate-400 hover:text-slate-900 transition-all">
+                    1st Generation (1G)
+                </button>
+                <button onclick="selectGen('2G')" id="tab-2G" class="text-xs uppercase tracking-widest pb-3 font-light border-b-2 border-transparent text-slate-400 hover:text-slate-900 transition-all">
+                    2nd Generation (2G)
+                </button>
+                <button onclick="selectGen('3G')" id="tab-3G" class="text-xs uppercase tracking-widest pb-3 font-light border-b-2 border-slate-900 text-slate-900 transition-all">
+                    3rd Generation (3G)
+                </button>
+            </div>
+
+            <!-- Display Container (Clean minimal borders, no card fill) -->
+            <div class="reveal border border-slate-200 bg-white p-8 md:p-12 transition-all" id="gen-content">
+                <!-- Dynamic Content Rendered Here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCER STRAINS & METABOLIC MACHINERY -->
+    <section id="strains" class="py-24 px-6 border-t border-slate-100 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">03 / BIOLOGICAL WORKHORSES</span>
+                <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">Producer Strains & Yeast Consortia</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Microalgae 1 -->
+                <div class="reveal border-t border-slate-200 pt-6 space-y-4">
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                        <span>MICROALGAE</span>
+                        <span>01</span>
+                    </div>
+                    <h3 class="text-xl font-light text-slate-900">Chlorella vulgaris</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        High starch and protein accumulator. Possesses rapid doubling times and strong resilience to industrial off-gas CO2 variations. Highly versatile for dual-purpose biofuel and protein extraction.
+                    </p>
+                    <div class="pt-4 border-t border-slate-100 text-[11px] font-extralight text-slate-600 space-y-1">
+                        <div>&bull; Biomass Doubling: 20-24 hrs</div>
+                        <div>&bull; Carbohydrate Accumulation: Up to 55% DW</div>
+                        <div>&bull; Lignin Content: Zero</div>
+                    </div>
+                </div>
+
+                <!-- Microalgae 2 -->
+                <div class="reveal border-t border-slate-200 pt-6 space-y-4" style="transition-delay: 100ms;">
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                        <span>MICROALGAE</span>
+                        <span>02</span>
+                    </div>
+                    <h3 class="text-xl font-light text-slate-900">Nannochloropsis sp.</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Salt-tolerant marine strain capable of growing directly in seawater. Minimizes freshwater demand while generating dense lipid and polysaccharide reserves suitable for integrated biorefineries.
+                    </p>
+                    <div class="pt-4 border-t border-slate-100 text-[11px] font-extralight text-slate-600 space-y-1">
+                        <div>&bull; Water Source: Seawater / Brackish</div>
+                        <div>&bull; High CO2 Fixation Capacity</div>
+                        <div>&bull; Ideal Co-product: EPA & Omega-3s</div>
+                    </div>
+                </div>
+
+                <!-- Fermentation Yeast -->
+                <div class="reveal border-t border-slate-200 pt-6 space-y-4" style="transition-delay: 200ms;">
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                        <span>FERMENTATION YEAST</span>
+                        <span>03</span>
+                    </div>
+                    <h3 class="text-xl font-light text-slate-900">Saccharomyces cerevisiae</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Industrial yeast agent used for converting algal glucose monosaccharides into ethanol. Engineered amylolytic strains facilitate Consolidated Bioprocessing (CBP).
+                    </p>
+                    <div class="pt-4 border-t border-slate-100 text-[11px] font-extralight text-slate-600 space-y-1">
+                        <div>&bull; Ethanol Tolerance: High</div>
+                        <div>&bull; Target Substrate: Glucose / Monosaccharides</div>
+                        <div>&bull; Fermentation Mode: SSF / CBP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STRAIN SCREENING & IMPROVEMENT PIPELINE -->
+            <div class="reveal mt-20 pt-16 border-t border-slate-200">
+                <h3 class="text-xl font-light text-slate-900 mb-8">Strain Selection & Screening Pipeline</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="p-6 border-l border-slate-200 space-y-2">
+                        <span class="text-xs font-mono text-emerald-600">STEP 01</span>
+                        <h4 class="text-sm font-normal text-slate-900">Isolation</h4>
+                        <p class="text-xs font-extralight text-slate-500 leading-relaxed">Indigenous extremophilic & local wastewater isolation for environmental fitness.</p>
+                    </div>
+
+                    <div class="p-6 border-l border-slate-200 space-y-2">
+                        <span class="text-xs font-mono text-emerald-600">STEP 02</span>
+                        <h4 class="text-sm font-normal text-slate-900">Primary Screening</h4>
+                        <p class="text-xs font-extralight text-slate-500 leading-relaxed">Optical Density (OD680) tracking to identify strains with high CO2 tolerance.</p>
+                    </div>
+
+                    <div class="p-6 border-l border-slate-200 space-y-2">
+                        <span class="text-xs font-mono text-emerald-600">STEP 03</span>
+                        <h4 class="text-sm font-normal text-slate-900">Secondary Screening</h4>
+                        <p class="text-xs font-extralight text-slate-500 leading-relaxed">Fluorescence & dry weight analysis to quantify starch and lipid density.</p>
+                    </div>
+
+                    <div class="p-6 border-l border-slate-200 space-y-2">
+                        <span class="text-xs font-mono text-emerald-600">STEP 04</span>
+                        <h4 class="text-sm font-normal text-slate-900">Strain Improvement</h4>
+                        <p class="text-xs font-extralight text-slate-500 leading-relaxed">Adaptive Laboratory Evolution (ALE) & Genetic Engineering of Carbon-Concentrating Mechanisms (CCM).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEGRATED PROCESS FLOW & INTERACTIVE HYDROLYSIS CALCULATOR -->
+    <section id="process" class="py-24 px-6 border-t border-slate-100 bg-slate-50/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">04 / PRODUCTION MECHANICS</span>
+                <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">Integrated Two-Stage Production Architecture</h2>
+            </div>
+
+            <!-- Interactive Stepper -->
+            <div class="reveal grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+                <!-- Step Selector (5 Steps) -->
+                <div class="lg:col-span-5 space-y-2">
+                    <button onclick="setProcessStep(1)" id="proc-btn-1" class="w-full text-left p-4 border-l-2 border-slate-900 bg-white transition-all">
+                        <div class="text-[10px] font-mono uppercase text-slate-400">Stage 01</div>
+                        <div class="text-sm font-light text-slate-900">Autotrophic Biomass Cultivation</div>
+                    </button>
+                    <button onclick="setProcessStep(2)" id="proc-btn-2" class="w-full text-left p-4 border-l-2 border-transparent hover:border-slate-300 transition-all">
+                        <div class="text-[10px] font-mono uppercase text-slate-400">Stage 02</div>
+                        <div class="text-sm font-light text-slate-900">Harvesting & Primary Cell Lysis</div>
+                    </button>
+                    <button onclick="setProcessStep(3)" id="proc-btn-3" class="w-full text-left p-4 border-l-2 border-transparent hover:border-slate-300 transition-all">
+                        <div class="text-[10px] font-mono uppercase text-slate-400">Stage 03</div>
+                        <div class="text-sm font-light text-slate-900">Acidic & Enzymatic Hydrolysis</div>
+                    </button>
+                    <button onclick="setProcessStep(4)" id="proc-btn-4" class="w-full text-left p-4 border-l-2 border-transparent hover:border-slate-300 transition-all">
+                        <div class="text-[10px] font-mono uppercase text-slate-400">Stage 04</div>
+                        <div class="text-sm font-light text-slate-900">Heterotrophic Fermentation (SSF)</div>
+                    </button>
+                    <button onclick="setProcessStep(5)" id="proc-btn-5" class="w-full text-left p-4 border-l-2 border-transparent hover:border-slate-300 transition-all">
+                        <div class="text-[10px] font-mono uppercase text-slate-400">Stage 05</div>
+                        <div class="text-sm font-light text-slate-900">Fractional Distillation & Dehydration</div>
+                    </button>
+                </div>
+
+                <!-- Step Detail Panel -->
+                <div class="lg:col-span-7 border border-slate-200 bg-white p-8 sm:p-10 min-h-[300px] flex flex-col justify-between" id="process-display">
+                    <!-- Javascript populates this -->
+                </div>
+            </div>
+
+            <!-- INTERACTIVE RSM HYDROLYSIS OPTIMIZATION SIMULATOR -->
+            <div class="reveal border border-slate-200 bg-white p-8 sm:p-12 mt-12">
+                <div class="max-w-2xl mb-8">
+                    <span class="text-xs font-mono uppercase text-emerald-600 block mb-1">INTERACTIVE LAB SIMULATOR</span>
+                    <h3 class="text-2xl font-light text-slate-900">Response Surface Methodology (RSM) Hydrolysis Yield Model</h3>
+                    <p class="text-xs font-extralight text-slate-500 mt-2 leading-relaxed">
+                        Simulate the experimental conditions (Ayyanna et al., 2023 for <em>Aurantiochytrium sp.</em>) by adjusting acid concentration and reaction exposure time to maximize fermentable glucose output.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <!-- Controls -->
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-light text-slate-700 mb-2">
+                                <span>Sulfuric Acid (H₂SO₄) Concentration</span>
+                                <span id="acid-val" class="font-mono text-emerald-600">3.5 %</span>
+                            </div>
+                            <input type="range" id="acid-slider" min="0.5" max="6.0" step="0.1" value="3.5" class="w-full" oninput="calculateYield()">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-light text-slate-700 mb-2">
+                                <span>Hydrolysis Duration</span>
+                                <span id="time-val" class="font-mono text-emerald-600">45 mins</span>
+                            </div>
+                            <input type="range" id="time-slider" min="10" max="120" step="5" value="45" class="w-full" oninput="calculateYield()">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-light text-slate-700 mb-2">
+                                <span>Thermal Digestion Temperature</span>
+                                <span id="temp-val" class="font-mono text-emerald-600">120 °C</span>
+                            </div>
+                            <input type="range" id="temp-slider" min="80" max="150" step="2" value="120" class="w-full" oninput="calculateYield()">
+                        </div>
+                    </div>
+
+                    <!-- Output Gauge Display -->
+                    <div class="border-t md:border-t-0 md:border-l border-slate-100 pt-6 md:pt-0 md:pl-10 text-center md:text-left flex flex-col justify-center">
+                        <span class="text-xs uppercase tracking-widest font-extralight text-slate-400">Predicted Fermentable Sugar Yield</span>
+                        <div class="text-5xl font-extralight text-slate-900 my-3">
+                            <span id="yield-output">18.0</span> <span class="text-lg text-slate-400">g/L</span>
+                        </div>
+                        <div class="text-xs font-extralight text-slate-500" id="yield-feedback">
+                            Optimal stoichiometry reached. Maximum glucose bioavailability unlocked.
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 text-[10px] font-mono text-slate-400">
+                            Model Equation: Y = f([H2SO4], t, T) &bull; Ref: IntechOpen 2023
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL-TIME FPGA & AI AUTOMATION SECTION -->
+    <section id="automation" class="py-24 px-6 border-t border-slate-100 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">05 / SMART INFRASTRUCTURE</span>
+                    <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">FPGA Real-Time Automation System</h2>
+                </div>
+                <p class="text-xs font-extralight text-slate-500 max-w-md">
+                    Implementation of field-programmable gate array (FPGA) logic to optimize photobioreactor dynamics in real time (Atlantis Press, 2026).
+                </p>
+            </div>
+
+            <!-- Automation Architecture Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-slate-100 pt-12 mb-16">
+                <div class="reveal space-y-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 mb-4">
+                        <i data-lucide="cpu" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-normal text-slate-900">Deterministic Closed-Loop Control</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Unlike microcontrollers with software latency, FPGA architectures execute hardware-level parallel monitoring of pH, dissolved oxygen, and optical density with microsecond response times.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-3" style="transition-delay: 100ms;">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 mb-4">
+                        <i data-lucide="activity" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-normal text-slate-900">Dynamic Nutrient & CO₂ Dosing</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Automatically adjusts nitrogen/phosphorus feed rates and industrial CO2 sparging to prevent photo-inhibition and keep ambient culture pH tightly locked between 6.5 and 8.5.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-3" style="transition-delay: 200ms;">
+                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 mb-4">
+                        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-normal text-slate-900">Early Pond-Crash Prevention</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Predictive machine-learning algorithms flag early deviations in light absorption profiles caused by rotifer or grazer infestations, triggering protective dilution or harvesting.
+                    </p>
+                </div>
+            </div>
+
+            <!-- LIVE TELEMETRY SIMULATOR -->
+            <div class="reveal border border-slate-200 bg-slate-900 text-white p-8 sm:p-12">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">FPGA Hardware Core #01 Active</span>
+                        </div>
+                        <h4 class="text-lg font-light text-white mt-1">Live Photobioreactor Sensor Telemetry</h4>
+                    </div>
+                    <button onclick="toggleTelemetry()" id="telemetry-btn" class="text-xs font-mono px-4 py-2 border border-slate-700 hover:border-slate-500 rounded text-slate-300">
+                        Pause Telemetry
+                    </button>
+                </div>
+
+                <!-- Telemetry Gauges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 border border-slate-800 bg-slate-950/50">
+                        <span class="text-[10px] font-mono text-slate-400 block uppercase">Culture pH</span>
+                        <span id="tel-ph" class="text-3xl font-extralight text-emerald-400 my-2 block">7.42</span>
+                        <span class="text-[9px] font-mono text-slate-500">Target: 6.5 - 8.5</span>
+                    </div>
+
+                    <div class="p-4 border border-slate-800 bg-slate-950/50">
+                        <span class="text-[10px] font-mono text-slate-400 block uppercase">Biomass Density (OD680)</span>
+                        <span id="tel-od" class="text-3xl font-extralight text-white my-2 block">2.84</span>
+                        <span class="text-[9px] font-mono text-slate-500">Growth Phase: Exponential</span>
+                    </div>
+
+                    <div class="p-4 border border-slate-800 bg-slate-950/50">
+                        <span class="text-[10px] font-mono text-slate-400 block uppercase">Temperature</span>
+                        <span id="tel-temp" class="text-3xl font-extralight text-white my-2 block">27.6 °C</span>
+                        <span class="text-[9px] font-mono text-slate-500">Range: 25 - 30 °C</span>
+                    </div>
+
+                    <div class="p-4 border border-slate-800 bg-slate-950/50">
+                        <span class="text-[10px] font-mono text-slate-400 block uppercase">CO₂ Injection Rate</span>
+                        <span id="tel-co2" class="text-3xl font-extralight text-emerald-400 my-2 block">142 mL/m</span>
+                        <span class="text-[9px] font-mono text-slate-500">Dynamic FPGA Valve: 68%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENGINEERING CHALLENGES & BOTTLENECKS SECTION -->
+    <section id="bottlenecks" class="py-24 px-6 border-t border-slate-100 bg-slate-50/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">06 / INDUSTRIAL HURDLES</span>
+                <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">Technical Bottlenecks & Strategic Mitigations</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Bottleneck 1 -->
+                <div class="reveal border border-slate-200 bg-white p-6 sm:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-4">
+                            <span class="text-xs font-mono text-emerald-600 uppercase">Hurdle 01</span>
+                            <h3 class="text-lg font-light text-slate-900 mt-1">The Harvesting Energy Debt</h3>
+                        </div>
+                        <div class="md:col-span-8 text-xs font-extralight text-slate-600 leading-relaxed space-y-3">
+                            <p>
+                                Microalgal cells are microscopic (2–10 µm) with neutral density close to water. Traditional separation via industrial centrifugation consumes 20–30% of total process energy, threatening net energy ratio positivity.
+                            </p>
+                            <div class="p-3 bg-slate-50 border-l-2 border-emerald-500 text-slate-800 font-normal">
+                                <strong>Mitigation:</strong> Implementation of bio-flocculation, electro-coagulation-flocculation (ECF), and acoustic wave harvesting to drastically cut harvesting energy expenditure.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottleneck 2 -->
+                <div class="reveal border border-slate-200 bg-white p-6 sm:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-4">
+                            <span class="text-xs font-mono text-emerald-600 uppercase">Hurdle 02</span>
+                            <h3 class="text-lg font-light text-slate-900 mt-1">PBR CAPEX vs Open Pond Crashes</h3>
+                        </div>
+                        <div class="md:col-span-8 text-xs font-extralight text-slate-600 leading-relaxed space-y-3">
+                            <p>
+                                Closed Photobioreactors (PBRs) offer ultra-pure high-density yields but suffer from high initial capital cost. Open raceway ponds are economically cheaper but vulnerable to invasive grazers and weather crashes.
+                            </p>
+                            <div class="p-3 bg-slate-50 border-l-2 border-emerald-500 text-slate-800 font-normal">
+                                <strong>Mitigation:</strong> Hybrid cultivation models: Indoor closed PBRs for pure seed inoculum generation followed by rapid outdoor high-density cultivation with strain consortia.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottleneck 3 -->
+                <div class="reveal border border-slate-200 bg-white p-6 sm:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-4">
+                            <span class="text-xs font-mono text-emerald-600 uppercase">Hurdle 03</span>
+                            <h3 class="text-lg font-light text-slate-900 mt-1">Evaporation & Salinity Spikes</h3>
+                        </div>
+                        <div class="md:col-span-8 text-xs font-extralight text-slate-600 leading-relaxed space-y-3">
+                            <p>
+                                High evaporation rates in arid open-pond regions cause osmotic stress and salt accumulation, inhibiting metabolic enzyme actions during photosynthesis.
+                            </p>
+                            <div class="p-3 bg-slate-50 border-l-2 border-emerald-500 text-slate-800 font-normal">
+                                <strong>Mitigation:</strong> Continuous coupling with municipal wastewater effluent streams or adapting halotolerant strains like <em>Nannochloropsis</em>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CIRCULAR BIOREFINERY MODEL -->
+    <section id="biorefinery" class="py-24 px-6 border-t border-slate-100 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16 text-center max-w-3xl mx-auto">
+                <span class="text-xs uppercase tracking-widest font-extralight text-emerald-600 block mb-2">07 / CIRCULAR ECONOMY</span>
+                <h2 class="text-3xl sm:text-4xl font-light text-slate-900 tracking-tight">The Multi-Product Biorefinery Strategy</h2>
+                <p class="text-xs font-extralight text-slate-500 mt-4 leading-relaxed">
+                    To make 3G bioethanol economically competitive with fossil fuels, industrial plants must extract zero-waste high-value co-products prior to or alongside carbohydrate fermentation (Müller et al., 2023).
+                </p>
+            </div>
+
+            <!-- Co-Products Grid Layout (No cards - minimalist lines) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-b border-slate-200 py-12">
+                <div class="reveal space-y-2">
+                    <div class="text-xs font-mono text-emerald-600">PRODUCT A</div>
+                    <h3 class="text-lg font-light text-slate-900">Bioethanol</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        High-octane liquid transportation fuel or oxygenated additive; zero net carbon exhaust footprint.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-2" style="transition-delay: 100ms;">
+                    <div class="text-xs font-mono text-emerald-600">PRODUCT B</div>
+                    <h3 class="text-lg font-light text-slate-900">Omega-3 Fatty Acids</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        High-value EPA & DHA lipids extracted post-cell disruption for nutraceutical markets.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-2" style="transition-delay: 200ms;">
+                    <div class="text-xs font-mono text-emerald-600">PRODUCT C</div>
+                    <h3 class="text-lg font-light text-slate-900">Protein Meal</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Residual biomass rich in essential amino acids repurposed for aquaculture feed.
+                    </p>
+                </div>
+
+                <div class="reveal space-y-2" style="transition-delay: 300ms;">
+                    <div class="text-xs font-mono text-emerald-600">PRODUCT D</div>
+                    <h3 class="text-lg font-light text-slate-900">Green Precursors</h3>
+                    <p class="text-xs font-extralight text-slate-500 leading-relaxed">
+                        Platform chemicals including renewable bio-ethylene and isopropanol for eco-plastics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CITATIONS & ACADEMIC REFERENCES -->
+    <section class="py-20 px-6 border-t border-slate-100 bg-slate-50/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-12">
+                <span class="text-xs uppercase tracking-widest font-extralight text-slate-400 block mb-2">BIBLIOGRAPHY</span>
+                <h2 class="text-2xl font-light text-slate-900">Academic References & Citations</h2>
+            </div>
+
+            <div class="reveal space-y-4 text-xs font-extralight text-slate-600 max-w-4xl border-t border-slate-200 pt-8">
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Ayyanna, C., Sujatha, K., Kumar Mohanthy, S., Rajangam, J., Naga Sudha, B., & Raghavendra, H. G. (2023). <em>Bioethanol production</em>. In Ethanol and Glycerol Chemistry - Production, Modelling, Applications, and Technological Aspects. IntechOpen. https://doi.org/10.5772/intechopen.109097
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    FPGA-Based Real-Time Automation System For Optimizing Algae Cultivation For 3rd Generation Biofuel Production. (2026). Proceedings of the International Conference on Applied Science and Technology (ICAST). Atlantis Press.
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Gronchi, N., De Bernardini, N., Cripwell, R. A., Treu, L., et al. (2022). Natural <em>Saccharomyces cerevisiae</em> strain reveals peculiar genomic traits for starch-to-bioethanol production. Frontiers in Microbiology, 12. https://doi.org/10.3389/fmich.2021.768562
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Matuszewska, A. (2016). Microorganisms as direct and indirect sources of alternative fuels. In Alternative Fuels, Technical and Environmental Conditions. IntechOpen. https://doi.org/10.5772/62397
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Müller, C., Scapini, T., Rempel, A., Abaide, E. R., et al. (2023). Challenges and opportunities for third-generation ethanol production: A critical review. Engineering Microbiology, 3, 100056. https://doi.org/10.1016/j.engmic.2022.100056
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Nagi, G. K., Minhas, A. K., Gaur, S., Jain, P., & Mandal, S. (2021). Integration of algal biofuels with bioremediation coupled industrial commodities towards cost-effectiveness. Frontiers in Energy Research, 9. https://doi.org/10.3389/fenrg.2021.735141
+                </p>
+                <p class="pl-6 -indent-6 leading-relaxed">
+                    Pandey, P., Pandey, D., Gupta, A., Gupta, R., Tiwari, S., & Singh, S. P. (2025). Cyanobacterial green chemistry: A blue-green approach for a sustainable environment, energy, and chemical production. RSC Sustainability, 3, 661-675. https://doi.org/10.1039/d4su00448e
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-6 border-t border-slate-200 bg-white text-slate-500">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-extralight">
+            <div>
+                <span class="font-normal text-slate-900">BRAC UNIVERSITY</span> &bull; Department of Biotechnology
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="https://drive.google.com/file/d/1FKef8V2VX9woPghLd2rpQdEkTQRgNhFs/view?usp=sharing" target="_blank" class="hover:text-slate-900 transition-colors">Google Drive PDF</a>
+                <a href="#navbar" class="hover:text-slate-900 transition-colors">Back to Top &uarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. SCROLL REVEAL INTERSECTION OBSERVER
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        // 2. GENERATION COMPARISON TAB LOGIC
+        const genData = {
+            '1G': {
+                title: 'First-Generation Bioethanol (1G)',
+                feedstock: 'Corn, Sugarcane, Wheat, Sugarbeet',
+                land: 'Arable prime agricultural land',
+                lignin: 'Low structural lignin',
+                efficiency: 'High initial ethanol yield but catastrophic food-vs-fuel impact',
+                verdict: 'Non-sustainable long-term due to global food insecurity & high freshwater usage.'
+            },
+            '2G': {
+                title: 'Second-Generation Bioethanol (2G)',
+                feedstock: 'Agricultural residues, Wood chips, Switchgrass, Bagasse',
+                land: 'Marginal agricultural land',
+                lignin: 'High recalcitrant lignocellulosic matrix requiring intense pre-treatment',
+                efficiency: 'Avoids direct food crops but suffers from costly acid/enzymatic disruption',
+                verdict: 'Inconsistent feedstock supply chains and extreme chemical pre-treatment costs.'
+            },
+            '3G': {
+                title: 'Third-Generation Bioethanol (3G) [Algal Biomass]',
+                feedstock: 'Microalgae (Chlorella, Nannochloropsis) & Macroalgae',
+                land: 'Non-arable desert terrain, ocean surfaces, or industrial footprint',
+                lignin: 'Zero lignin polymers; soft intracellular starch and cellulose',
+                efficiency: 'Up to 10x higher areal yield per acre compared to terrestrial crops',
+                verdict: 'Optimal carbon-neutral biofuel model; integrates industrial flue gases & wastewater.'
+            }
+        };
+
+        function selectGen(genKey) {
+            // Update active tab styles
+            ['1G', '2G', '3G'].forEach(key => {
+                const tab = document.getElementById(`tab-${key}`);
+                if (key === genKey) {
+                    tab.className = "text-xs uppercase tracking-widest pb-3 font-light border-b-2 border-slate-900 text-slate-900 transition-all";
+                } else {
+                    tab.className = "text-xs uppercase tracking-widest pb-3 font-light border-b-2 border-transparent text-slate-400 hover:text-slate-900 transition-all";
+                }
+            });
+
+            const data = genData[genKey];
+            const contentContainer = document.getElementById('gen-content');
+            
+            contentContainer.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <h3 class="text-xl font-light text-slate-900">${data.title}</h3>
+                        <span class="text-xs font-mono text-emerald-600">${genKey} MATRIX</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-extralight text-slate-600">
+                        <div>
+                            <span class="font-normal text-slate-900 block mb-1">Primary Feedstock Source</span>
+                            <p>${data.feedstock}</p>
+                        </div>
+                        <div>
+                            <span class="font-normal text-slate-900 block mb-1">Land & Water Requirements</span>
+                            <p>${data.land}</p>
+                        </div>
+                        <div>
+                            <span class="font-normal text-slate-900 block mb-1">Lignin Recalcitrance</span>
+                            <p>${data.lignin}</p>
+                        </div>
+                        <div>
+                            <span class="font-normal text-slate-900 block mb-1">Process Yield & Footprint</span>
+                            <p>${data.efficiency}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 border-l-2 border-slate-900 text-xs font-extralight text-slate-800">
+                        <span class="font-normal">Strategic Verdict:</span> ${data.verdict}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize with 3G active
+        selectGen('3G');
+
+
+        // 3. PROCESS STEPPER LOGIC
+        const processSteps = {
+            1: {
+                title: "Stage 01: Autotrophic Biomass Cultivation",
+                body: "Microalgae (Chlorella vulgaris) are grown in closed high-tech Photobioreactors (PBRs) or open raceway ponds using sunlight/LEDs, inorganic nutrients, and industrial flue gas CO2.",
+                specs: ["pH Range: 6.5 – 8.5", "Temperature: 25°C – 30°C", "Growth Photoperiod: Continuous / Dynamic LED"]
+            },
+            2: {
+                title: "Stage 02: Cell Harvest & Primary Lysis",
+                body: "Biomass is harvested via low-energy bio-flocculation or centrifugation. Mechanical or mild chemical disruption breaks open cell walls to expose intracellular starch.",
+                specs: ["Dewatering Efficiency: 92-95%", "Lysis Method: Ultrasonic / Chemical", "Localization: Intracellular Starch"]
+            },
+            3: {
+                title: "Stage 03: Acidic & Enzymatic Hydrolysis",
+                body: "Polysaccharides are hydrolysed into fermentable monosaccharides (glucose). Response Surface Methodology (RSM) optimizes dilute H2SO4 concentration (3.5%) and digestion time.",
+                specs: ["Target Sugar Titre: ~18 g/L", "Acid Standard: 3.5% H2SO4", "Enzyme Complex: Amylase & Cellulase"]
+            },
+            4: {
+                title: "Stage 04: Simultaneous Saccharification & Fermentation (SSF)",
+                body: "Saccharomyces cerevisiae converts released glucose into liquid bioethanol in a single reaction vessel, avoiding end-product inhibition of enzymes.",
+                specs: ["Microorganism: S. cerevisiae", "Process Mode: SSF / CBP Consortia", "Fermentation Time: 48 – 72 hrs"]
+            },
+            5: {
+                title: "Stage 05: Fractional Distillation & Recovery",
+                body: "Fermentation broth undergoes fractional distillation and molecular sieve dehydration to isolate pure fuel-grade anhydrous bioethanol (>99.5%).",
+                specs: ["Ethanol Purity: 99.5% Anhydrous", "By-product: Protein & Lipid Residue", "Energy Recovery: Integrated Bioheat"]
+            }
+        };
+
+        function setProcessStep(stepNum) {
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`proc-btn-${i}`);
+                if (i === stepNum) {
+                    btn.className = "w-full text-left p-4 border-l-2 border-slate-900 bg-white transition-all";
+                } else {
+                    btn.className = "w-full text-left p-4 border-l-2 border-transparent hover:border-slate-300 transition-all";
+                }
+            }
+
+            const step = processSteps[stepNum];
+            const display = document.getElementById('process-display');
+            display.innerHTML = `
+                <div>
+                    <span class="text-xs font-mono uppercase text-emerald-600 block mb-2">DETAILED PROCESS SPECIFICATION</span>
+                    <h3 class="text-xl font-light text-slate-900 mb-4">${step.title}</h3>
+                    <p class="text-xs font-extralight text-slate-600 leading-relaxed mb-6">${step.body}</p>
+                </div>
+
+                <div class="border-t border-slate-100 pt-6">
+                    <span class="text-[11px] font-normal uppercase text-slate-900 block mb-3">Key Operating Parameters:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        ${step.specs.map(s => `<div class="p-3 bg-slate-50 text-[11px] font-mono text-slate-700">${s}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize with step 1
+        setProcessStep(1);
+
+
+        // 4. HYDROLYSIS YIELD SIMULATOR (RSM SIMULATION)
+        function calculateYield() {
+            const acid = parseFloat(document.getElementById('acid-slider').value);
+            const time = parseFloat(document.getElementById('time-slider').value);
+            const temp = parseFloat(document.getElementById('temp-slider').value);
+
+            document.getElementById('acid-val').innerText = `${acid.toFixed(1)} %`;
+            document.getElementById('time-val').innerText = `${time} mins`;
+            document.getElementById('temp-val').innerText = `${temp} °C`;
+
+            // Non-linear RSM model curve simulation centered around 3.5% acid, 45 min, 120 C
+            const acidFactor = 1 - Math.pow((acid - 3.5) / 3.0, 2);
+            const timeFactor = 1 - Math.pow((time - 50) / 60.0, 2);
+            const tempFactor = 1 - Math.pow((temp - 120) / 40.0, 2);
+
+            let yieldVal = 18.0 * acidFactor * timeFactor * tempFactor;
+            if (yieldVal < 2.0) yieldVal = 2.0;
+            if (yieldVal > 18.4) yieldVal = 18.4;
+
+            document.getElementById('yield-output').innerText = yieldVal.toFixed(1);
+
+            const feedbackEl = document.getElementById('yield-feedback');
+            if (yieldVal > 16.5) {
+                feedbackEl.innerText = "Optimal stoichiometry reached. Maximum glucose bioavailability unlocked.";
+                feedbackEl.className = "text-xs font-extralight text-emerald-600";
+            } else if (yieldVal > 11.0) {
+                feedbackEl.innerText = "Sub-optimal conversion efficiency. Moderate polysaccharide residual remaining.";
+                feedbackEl.className = "text-xs font-extralight text-amber-600";
+            } else {
+                feedbackEl.innerText = "High degradation or incomplete cell lysis. Glucose degradation observed.";
+                feedbackEl.className = "text-xs font-extralight text-rose-600";
+            }
+        }
+
+
+        // 5. FPGA TELEMETRY SIMULATION LOOP
+        let telemetryActive = true;
+
+        function toggleTelemetry() {
+            telemetryActive = !telemetryActive;
+            const btn = document.getElementById('telemetry-btn');
+            btn.innerText = telemetryActive ? "Pause Telemetry" : "Resume Telemetry";
+        }
+
+        setInterval(() => {
+            if (!telemetryActive) return;
+
+            // Micro fluctuations
+            const ph = (7.40 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+            const od = (2.80 + (Math.random() * 0.1 - 0.05)).toFixed(2);
+            const temp = (27.5 + (Math.random() * 0.4 - 0.2)).toFixed(1);
+            const co2 = Math.floor(140 + (Math.random() * 6 - 3));
+
+            document.getElementById('tel-ph').innerText = ph;
+            document.getElementById('tel-od').innerText = od;
+            document.getElementById('tel-temp').innerText = `${temp} °C`;
+            document.getElementById('tel-co2').innerText = `${co2} mL/m`;
+        }, 2000);
+    </script>
+</body>
+</html>
